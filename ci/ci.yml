@@ -1,0 +1,41 @@
+# OpenGal CI 工作流
+# 启用方法: 把本文件复制为 .github/workflows/ci.yml 并提交,
+# GitHub Actions 即会在 push / PR 时自动运行。
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate demo assets
+        run: |
+          pip install pillow
+          python tools/setup_demo.py
+      - name: Configure
+        run: cmake -B build -G "Visual Studio 17 2022"
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Run VM smoke test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Validate demo game assets
+        run: python tools/pack.py check games/demo
+
+  build-linux-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax-check core (headless compile of script engine)
+        run: |
+          g++ -std=c++17 -fsyntax-only -Iengine/core engine/core/gal_script.cpp
+          g++ -std=c++17 -fsyntax-only -Iengine/include -Iengine/core engine/core/opengal.cpp
+          g++ -std=c++17 -fsyntax-only -Iengine/include engine/audio/null_audio.cpp
+          g++ -std=c++17 -fsyntax-only -Iengine/include engine/audio/opensl_audio.cpp
+      - name: Validate demo game assets
+        run: python3 tools/pack.py check games/demo
