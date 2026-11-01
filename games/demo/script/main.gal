@@ -1,0 +1,41 @@
+# ============================================================
+# OpenGal 示例剧本: 演示全部核心特性
+#   背景 / 立绘 / 对话 / 选项(内联块与跳转) / 变量与分支
+#   音乐 / 音效 / 等待 / 淡入淡出
+# ============================================================
+
+label start
+scene bg/sky.png fade
+play music bgm/theme.wav loop
+show char/heroine.png at center
+
+"这是一个晴朗的早晨。"
+"少女转过身，向你露出了微笑。"
+苍 "你好！欢迎来到 OpenGal 的世界。"
+苍 "这是一个可以跑在 Windows、Android 和 HarmonyOS 上的 Galgame 引擎。"
+play sound se/click.wav
+
+menu:
+    "苍是谁？":
+        苍 "我是这个演示剧本的女主角哦。"
+        苍 "现在看到的立绘、背景、对话框，全部由引擎实时渲染。"
+        jump intro_done
+    "引擎是怎么工作的？":
+        苍 "剧本会被编译成字节码，由虚拟机逐条执行。"
+        苍 "平台只负责提供窗口、文件和触摸事件，渲染与 UI 都在引擎内完成。"
+        jump intro_done
+    "跳过介绍" -> skip_intro
+
+label intro_done
+set has_menu = 1
+if has_menu == 1:
+    苍 "你刚刚做过选择，所以看到了这条 if 分支。"
+else:
+    苍 "这是 else 分支，正常情况下不会出现。"
+
+label skip_intro
+wait 300
+苍 "点击屏幕推进对话，遇到选项时点击按钮。"
+苍 "把 games/demo 换成你自己的剧本和资源，就能开始创作了。"
+苍 "感谢游玩 OpenGal Demo！"
+"—— 剧终 ——"
