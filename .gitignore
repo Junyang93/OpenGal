@@ -1,0 +1,44 @@
+# 构建产物
+build/
+out/
+.cmake/
+CMakeCache.txt
+CMakeFiles/
+*.o
+*.obj
+*.so
+*.exe
+*.pdb
+*.ilk
+
+# IDE
+.idea/
+.vs/
+.vscode/
+*.iml
+
+# Android
+platform/android/.gradle/
+platform/android/local.properties
+platform/android/**/build/
+
+# HarmonyOS
+platform/harmonyos/**/build/
+platform/harmonyos/**/.cxx/
+platform/harmonyos/node_modules/
+platform/harmonyos/oh_modules/
+local.properties
+.cxx/
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 生成的二进制资源(用 tools/setup_demo.py 重新生成)
+games/demo/bg/
+games/demo/char/
+games/demo/bgm/
+games/demo/se/
+games/demo/font/
+platform/harmonyos/entry/src/main/resources/base/media/icon.png
+*.galpack
