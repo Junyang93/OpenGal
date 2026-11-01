@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "OpenGal Galgame 引擎演示"
+    },
+    {
+      "name": "app_name",
+      "value": "OpenGal Demo"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "OpenGal Demo"
+    }
+  ]
+}

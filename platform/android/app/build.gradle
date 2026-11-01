@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.opengal.demo'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.opengal.demo"
+        minSdk 24
+        targetSdk 34
+
+        externalNativeBuild {
+            cmake {
+                cppFlags '-std=c++17'
+                arguments "-DENGINE_ROOT=${rootDir}/../.."
+            }
+        }
+    }
+
+    // 直接引用仓库内的示例游戏作为 assets(打包进 APK 根路径)
+    sourceSets {
+        main {
+            assets.srcDir "${rootDir}/../games/demo"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}

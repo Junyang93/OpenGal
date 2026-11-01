@@ -1,0 +1,9 @@
+{
+  "name": "opengaldemo",
+  "version": "1.0.0",
+  "description": "OpenGal Galgame Engine HarmonyOS Demo",
+  "main": "",
+  "author": "OpenGal",
+  "license": "MIT",
+  "dependencies": {}
+}
